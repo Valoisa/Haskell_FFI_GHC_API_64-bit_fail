@@ -4,6 +4,7 @@ module Compilation where
 -- GHC API
 import InteractiveEval (setContext, getNamesInScope, runDecls, compileExpr)
 import GHC (Ghc, InteractiveImport(..), Name, runGhc, getSessionDynFlags, setSessionDynFlags, mkModuleName, defaultErrorHandler, noLoc)
+import GhcMonad (liftIO)
 import DynFlags (DynFlags, HscTarget(..), GhcLink(..), WarningFlag(..), wopt_set, xopt_set, defaultFlushOut, defaultFatalMessager, hscTarget, ghcLink)
 import GHC.Hs.ImpExp (IE(..), IEWrappedName(..), ImportDecl(..), simpleImportDecl)
 import GHC.Hs.Extension (NoExtField(..))
@@ -26,9 +27,6 @@ import Control.DeepSeq (($!!))
 import Data.List.Split.Internals (splitOn)
 import Unsafe.Coerce (unsafeCoerce)
 import Prelude hiding (catch)
-
--- CGI
-import Network.CGI (liftIO)
 
 -- Foreign export declarations
 foreign export ccall c_create_context :: IO (StablePtr (Either SomeException (Ghc [Name])))
