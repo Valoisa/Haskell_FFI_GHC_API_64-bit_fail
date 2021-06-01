@@ -10,7 +10,6 @@ import GHC.Hs.ImpExp (IE(..), IEWrappedName(..), ImportDecl(..), simpleImportDec
 import GHC.Hs.Extension (NoExtField(..))
 import RdrName (mkRdrUnqual)
 import OccName (mkVarOcc)
-import GHC.Paths (libdir)
 import GHC.Magic (inline)
 import GHC.LanguageExtensions.Type (Extension(..))
 
@@ -27,6 +26,11 @@ import Control.DeepSeq (($!!))
 import Data.List.Split.Internals (splitOn)
 import Unsafe.Coerce (unsafeCoerce)
 import Prelude hiding (catch)
+
+-- DON'T USE "GhcPaths" package! GHC is relocated to different location!
+-- Put your location here!
+libdir :: FilePath
+libdir = "C:\\Progs\\ghc\\lib"
 
 -- Foreign export declarations
 foreign export ccall c_create_context :: IO (StablePtr (Either SomeException (Ghc [Name])))
