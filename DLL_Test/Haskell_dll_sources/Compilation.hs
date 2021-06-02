@@ -4,12 +4,12 @@ module Compilation where
 -- GHC API
 import InteractiveEval (setContext, getNamesInScope, runDecls, compileExpr)
 import GHC (Ghc, InteractiveImport(..), Name, runGhc, getSessionDynFlags, setSessionDynFlags, mkModuleName, defaultErrorHandler, noLoc)
+import GhcMonad (liftIO)
 import DynFlags (DynFlags, HscTarget(..), GhcLink(..), WarningFlag(..), wopt_set, xopt_set, defaultFlushOut, defaultFatalMessager, hscTarget, ghcLink)
 import GHC.Hs.ImpExp (IE(..), IEWrappedName(..), ImportDecl(..), simpleImportDecl)
 import GHC.Hs.Extension (NoExtField(..))
 import RdrName (mkRdrUnqual)
 import OccName (mkVarOcc)
-import GHC.Paths (libdir)
 import GHC.Magic (inline)
 import GHC.LanguageExtensions.Type (Extension(..))
 
@@ -27,8 +27,10 @@ import Data.List.Split.Internals (splitOn)
 import Unsafe.Coerce (unsafeCoerce)
 import Prelude hiding (catch)
 
--- CGI
-import Network.CGI (liftIO)
+-- DON'T USE "GhcPaths" package! GHC is relocated to different location!
+-- Put your location here!
+libdir :: FilePath
+libdir = "C:\\Progs\\ghc\\lib"
 
 -- Foreign export declarations
 foreign export ccall c_create_context :: IO (StablePtr (Either SomeException (Ghc [Name])))

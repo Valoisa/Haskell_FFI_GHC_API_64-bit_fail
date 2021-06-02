@@ -22,7 +22,7 @@ typedef std::function<void(const wchar_t*)> cwstring_deleter_type;
 
 int main(void)
 {
-	HINSTANCE module = ::LoadLibrary(L"HSCodeGen.lib");
+	HINSTANCE module = ::LoadLibrary(L"HSCodeGen.dll");
 //	GetLastError
 	if (module == NULL)
 		throw std::exception("Failed to load HSCodeGen library.\n");
